@@ -6,7 +6,7 @@ class Person:
 
     # The __init__ method is called every time a new object is created. We use it to set some initial values for our object.
     # The self parameter is a reference to the new object being created.
-    # We are then telling it we are going to pass in an argument of name and age.
+    # We are then telling it we are going to pass in an argument of name, age and clothes.
     def __init__(self, name, age, clothes:list):
         # We then set the values of the instance variables with the arguments from __init__.
         self.name = name
@@ -29,28 +29,30 @@ class Person:
 
 
 # Define a subclass of Person, named Student.
+# This extends the super class and allows us to add functionality or change behaviors. 
+# This is a example of polymorphism.
 class Student(Person):
 
     # The __init__ method is called every time a new object is created. We use it to set some initial values for our object.
     # The self parameter is a reference to the new object being created.
-    # We are then telling it we are going to pass in an argument of name, age, school.
+    # We are then telling it we are going to pass in an argument of name, age, clothes, school.
     def __init__(self, name, age, clothes, school):
-        # We can the super() function to call the __init__ method of the parent class.
+        # We can use the super() function to call the __init__ method of the parent class.
         # This allows us to pass in the arguments that are needed for the parent class.
         super().__init__(name, age, clothes)
         # Then we set the values of the other instance variables with the arguments from __init__.
         self.school = school
     
-    # This methord overrides the one in the parent class.
+    # This method overrides the one of the same name  in the parent class.
     # This means if we call the sayHello method in the Student class, it will call this method instead of the one in the parent class (Person).
     def sayHello(self):
         print("Hello my name is " + self.name + " and I am a student at " + self.school)
 
     def saySimpleHello(self):
-        # This calls the parent class method.
+        # This calls the parent class method as we are using the super() to reference the parent class function
         super().sayHello()
     
-    # We can also add new methord for just the child/subclass.
+    # We can also add new method for just the child/subclass.
     def getYearGroup(self):
         # Returns the year group as a integer.
         return self.age - 5
@@ -85,7 +87,7 @@ class Employee(Person):
 
     # The __init__ method is called every time a new object is created. We use it to set some initial values for our object.
     # The self parameter is a reference to the new object being created.
-    # We are then telling it we are going to pass in an argument of name, age, salary.
+    # We are then telling it we are going to pass in an argument of name, age, clothes, inital salary and job_title.
     def __init__(self, name, age, clothes, initialSalary:int, job_title):
         # We can the super() function to call the __init__ method of the parent class.
         # This allows us to pass in the arguments that are needed for the parent class.
@@ -96,7 +98,7 @@ class Employee(Person):
         # This is composition as the Salary instance will only exist as a part of the Employee Instance.
         self.salary = Salary(initialSalary)
     
-    # This methord overrides the one in the parent class.
+    # This method overrides the one in the parent class.
     # This means if we call the sayHello method in the Employee class, it will call this method instead of the one in the parent class (Person).
     def sayHello(self):
         print("Hello my name is " + self.name + " and I am an employee with a salary of " + str(self.salary.getSalary()) + " and a position of " + self.position)
@@ -105,7 +107,7 @@ class Employee(Person):
         # This calls the parent class method.
         super().sayHello()
     
-    # We can also add new methord for just the child/subclass.
+    # We can also add new method for just the child/subclass.
     def giveRaise(self):
         # This calls the Salary instance method raiseSalary.
         self.salary.raiseSalary()
@@ -171,7 +173,7 @@ employee1.giveRaise()
 # This calls the sayHello method on the employee1 object.
 employee1.sayHello()
 
-# We could call the static methord calculate_tax in two ways.
+# We could call the static method calculate_tax in two ways.
 # The first way is to call the method directly on the class.
 print(Salary.calculate_tax(employee1.salary.getSalary()))
 # The second way is to call the method on the Salary instance.
